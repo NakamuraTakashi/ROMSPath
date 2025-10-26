@@ -11,6 +11,7 @@
 
 #CPPFLAGS  = -DGROWTH -DWETDRY  -DSTOKES
 #CPPFLAGS  =  -DWETDRY
+CPPFLAGS  = -DWETDRY
 
 #------------------------------------------------
 #    Set compiler and flags
@@ -31,9 +32,12 @@ endif
 
 ifdef GFORTRAN
   FC = gfortran
+  NETCDF_INCDIR = /usr/include
+  NETCDF_LIBDIR = /usr/lib
 
   CPPFLAGS  += -DGFORTRAN
-  FFLAGS = -march=k8 -ffast-math -fno-cx-limited-range -O3 -funroll-loops --param max-unroll-times=4 -ffree-line-length-none -cpp  $(CPPFLAGS) -I$(NETCDF_INCDIR)
+#  FFLAGS = -march=k8 -ffast-math -fno-cx-limited-range -O3 -funroll-loops --param max-unroll-times=4 -ffree-line-length-none -cpp  $(CPPFLAGS) -I$(NETCDF_INCDIR)
+  FFLAGS = -O3 -ffree-line-length-none -cpp  $(CPPFLAGS) -I$(NETCDF_INCDIR)
 #   FFLAGS = -g -O0   -ffree-line-length-none -cpp  $(CPPFLAGS) -I$(NETCDF_INCDIR)
 endif
 
@@ -53,7 +57,7 @@ endif
 #        HDF5 :=
 #------------------------------------------------
 
-HDF5 := on
+HDF5 := 
 NFCONFIG := on
 #==========================================================================
 # End of user-defined options. Nothing should be changed below this point =
@@ -91,15 +95,15 @@ ROMSPath : $(OBJS)
 
 	@echo "  Compiling ROMSPath.f90 "
 	@echo " Using $(FC) "
-	@echo " $(FC) $(FFLAGS) -o ROMSPath.exe ROMSPath.f90 $(OBJS) $(LIBS)  -save-temps "
-	@$(FC) $(FFLAGS) -o ROMSPath.exe ROMSPath.f90 $(OBJS) $(LIBS)  -save-temps
+	@echo " $(FC) $(FFLAGS) -o ROMSPath.exe ROMSPath.f90 $(OBJS) $(LIBS) "
+	@$(FC) $(FFLAGS) -o ROMSPath.exe ROMSPath.f90 $(OBJS) $(LIBS)
 	@echo "  "
 	@echo "  Compilation Successfully Completed"
 	@echo "  "
 
 %.o: %.f90
 	@echo "  Compiling $<"
-	@$(FC) $(FFLAGS) -cpp  $(CPPFLAGS) -save-temps -c $<
+	@$(FC) $(FFLAGS) -cpp  $(CPPFLAGS) -c $<
 
 clean:
 	\rm *.o *.mod *.i90 *.s *.exe

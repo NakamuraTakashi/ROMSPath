@@ -1228,46 +1228,41 @@ contains
 
 		!NF90_DEF_VAR
 
-			STATUS = NF90_DEF_VAR(NCID,'model_time',NF_DOUBLE,(/timeID/),modtimeID,&
-								  deflate_level=1,shuffle=.true.)
+			STATUS = NF90_DEF_VAR(NCID,'model_time',NF_DOUBLE,(/timeID/),modtimeID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: time var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			IF( PRESENT(dob) )THEN
-			  STATUS = NF90_DEF_VAR(NCID,'dob',NF_FLOAT,(/numparID/),dobID,       &
-								  deflate_level=1,shuffle=.true.)
+			  STATUS = NF90_DEF_VAR(NCID,'dob',NF_FLOAT,(/numparID/),dobID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: dob var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 			ENDIF
 
-			STATUS = NF90_DEF_VAR(NCID,'age',NF_DOUBLE,(/numparID,timeID/),pageID, &
-								  deflate_level=1,shuffle=.true.)
+			STATUS = NF90_DEF_VAR(NCID,'age',NF_DOUBLE,(/numparID,timeID/),pageID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: age var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
-			STATUS = NF90_DEF_VAR(NCID,'lon',NF_FLOAT,(/numparID,timeID/),lonID,  &
-								  deflate_level=1,shuffle=.true.)
+			STATUS = NF90_DEF_VAR(NCID,'lon',NF_FLOAT,(/numparID,timeID/),lonID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: lon var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
-			STATUS = NF90_DEF_VAR(NCID,'lat',NF_FLOAT,(/numparID,timeID/),latID,  &
-								  deflate_level=1,shuffle=.true.)
+			STATUS = NF90_DEF_VAR(NCID,'lat',NF_FLOAT,(/numparID,timeID/),latID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: lat var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			STATUS = NF90_DEF_VAR(NCID,'zp',NF_FLOAT,(/numparID,timeID/),      &
-								  depthID,deflate_level=1,shuffle=.true.)
+								  depthID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: zp var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			STATUS = NF90_DEF_VAR(NCID,'status',NF_FLOAT,(/numparID,timeID/),      &
-								  statusID,deflate_level=1,shuffle=.true.)
+								  statusID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: status var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			IF (Ngrid .gt.1) THEN
 				STATUS = NF90_DEF_VAR(NCID,'GID',NF_FLOAT,(/numparID,timeID/),      &
-								  ngID,deflate_level=1,shuffle=.true.)
+								  ngID)
 				IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: status var'
 				IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
@@ -1276,13 +1271,13 @@ contains
 			
 			IF(TrackCollisions)THEN
 			  STATUS =NF90_DEF_VAR(NCID,'hitBottom',NF_FLOAT,(/numparID,timeID/), &
-								   hitBID,deflate_level=1,shuffle=.true.)
+								   hitBID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: Bottom ', &
 												  'Collision var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			  STATUS = NF90_DEF_VAR(NCID,'hitLand',NF_FLOAT,(/numparID,timeID/),  &
-									hitLID,deflate_level=1,shuffle=.true.)
+									hitLID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: Land ',   &
 												  'Collision var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1290,13 +1285,13 @@ contains
 
 			IF(SaltTempOn)THEN
 			  STATUS = NF90_DEF_VAR(NCID,'salinity',NF_FLOAT,(/numparID,timeID/), &
-									saltID,deflate_level=1,shuffle=.true.)
+									saltID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'Salinity var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			  STATUS = NF90_DEF_VAR(NCID,'temperature',NF_FLOAT,                  &
-									(/numparID,timeID/),tempID,deflate_level=1)
+									(/numparID,timeID/),tempID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'Temperature var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1305,19 +1300,19 @@ contains
 			
 			IF(WriteBottom)THEN
 			  STATUS = NF90_DEF_VAR(NCID,'HOB',NF_FLOAT,(/numparID,timeID/), &
-									HOBID,deflate_level=1,shuffle=.true.)
+									HOBID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'HIB var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			  STATUS = NF90_DEF_VAR(NCID,'bustr',NF_FLOAT,                  &
-									(/numparID,timeID/),bustrID,deflate_level=1)
+									(/numparID,timeID/),bustrID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'Bottom Stress U var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 			  
 			  STATUS = NF90_DEF_VAR(NCID,'bvstr',NF_FLOAT,                  &
-									(/numparID,timeID/),bvstrID,deflate_level=1)
+									(/numparID,timeID/),bvstrID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'Bottom Stress V var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1325,7 +1320,7 @@ contains
 			
 			IF(WriteWaterDepth)THEN
 			  STATUS = NF90_DEF_VAR(NCID,'WaterDepth',NF_FLOAT,(/numparID,timeID/), &
-									WDID,deflate_level=1,shuffle=.true.)
+									WDID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'Waterdepth var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1335,7 +1330,7 @@ contains
 			
 			IF(WriteZeta)THEN
 			  STATUS = NF90_DEF_VAR(NCID,'zeta',NF_FLOAT,(/numparID,timeID/), &
-									ZETAID,deflate_level=1,shuffle=.true.)
+									ZETAID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'Zeta var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1344,7 +1339,7 @@ contains
 			
 			IF(WriteBath)THEN
 			  STATUS = NF90_DEF_VAR(NCID,'h',NF_FLOAT,(/numparID,timeID/), &
-									BATHID,deflate_level=1,shuffle=.true.)
+									BATHID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'H var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1354,25 +1349,25 @@ contains
 			
 			IF((Behavior .eq. 10) .OR. (Process_VA))THEN
 				STATUS = NF90_DEF_VAR(NCID,'vorticity',NF_FLOAT,(/numparID,timeID/), &
-									VORTID,deflate_level=1,shuffle=.true.)
+									VORTID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'vorticity var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 			  
 				STATUS = NF90_DEF_VAR(NCID,'acceleration',NF_FLOAT,(/numparID,timeID/), &
-									ACCID,deflate_level=1,shuffle=.true.)
+									ACCID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'acceleration var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 			  
 				STATUS = NF90_DEF_VAR(NCID,'behave_w',NF_FLOAT,(/numparID,timeID/), &
-									BWID,deflate_level=1,shuffle=.true.)
+									BWID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'behave_w var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 			  
 				STATUS = NF90_DEF_VAR(NCID,'swinksinkflag',NF_FLOAT,(/numparID,timeID/), &
-									SSFID,deflate_level=1,shuffle=.true.)
+									SSFID)
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: ',        &
 												  'swinksinkflag var'
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
@@ -1383,8 +1378,7 @@ contains
 			
 #ifdef GROWTH
 			
-			STATUS = NF90_DEF_VAR(NCID,'size',NF_FLOAT,(/numparID,timeID/),sizeID, &
-								  deflate_level=1,shuffle=.true.)
+			STATUS = NF90_DEF_VAR(NCID,'size',NF_FLOAT,(/numparID,timeID/),sizeID)
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) 'Problem createNetCDF: size var'
 			IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
@@ -1542,7 +1536,7 @@ contains
 									"Temperature at the particle's location")
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
-			  STATUS = NF90_PUT_ATT(NCID, tempID, "units", "° Celsius")
+			  STATUS = NF90_PUT_ATT(NCID, tempID, "units", "ï¿½ Celsius")
 			  IF(STATUS /= NF90_NOERR) WRITE(*,*) NF_STRERROR(STATUS)
 
 			  STATUS = NF90_PUT_ATT(NCID, tempID, "field",                         &
